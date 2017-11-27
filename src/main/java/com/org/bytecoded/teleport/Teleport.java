@@ -6,37 +6,17 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.org.bytecoded.teleport.domain.Port;
 
 public class Teleport {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(Teleport.class.getName());
 
-	public static<T> boolean canTeleport(Port<T> fromCity, Port<T> toCity, LinkedHashMap<Port<T>, List<Port<T>>> ports){
-
-		Set<Port<T>> teleportableCities = new HashSet<Port<T>>(ports.get(fromCity));
-
-		if(teleportableCities.contains(toCity)){
-			return true;
-		} else {
-			fromCity.setVisited(true);
-			Iterator<Port<T>> iter = teleportableCities.iterator();
-			while (iter.hasNext()) {
-				Port<T> adjacentPort = iter.next();
-				if(!adjacentPort.isVisited())
-					return canTeleport(adjacentPort, toCity, ports);
-			}
-		}
-
-		return false;
-
-	}
-
-	public static<T> Set<Port<T>> getCitiesFrom(Port<T> cityPort, int noOfJumps, LinkedHashMap<Port<T>, List<Port<T>>> ports){
-
-		Set<Port<T>> teleportableCities = new LinkedHashSet<Port<T>>();
+	public static Set<Port> getCitiesInNJumps(Port cityPort, int noOfJumps, LinkedHashMap<Port, List<Port>> ports) {
+		Set<Port> teleportableCities = new LinkedHashSet<Port>();
 
 		int i = 0;
 		while(i < noOfJumps){
@@ -46,10 +26,10 @@ public class Teleport {
 				teleportableCities.addAll(ports.get(cityPort));
 			}
 			else{
-				Set<Port<T>> nextTeleportableCities = new LinkedHashSet<Port<T>>();
-				Iterator<Port<T>> iter = teleportableCities.iterator();
+				Set<Port> nextTeleportableCities = new LinkedHashSet<Port>();
+				Iterator<Port> iter = teleportableCities.iterator();
 				while (iter.hasNext()) {
-					Port<T> adjacentPort = iter.next();
+					Port adjacentPort = iter.next();
 					if (!adjacentPort.isVisited()) {
 						adjacentPort.setVisited(true);
 						nextTeleportableCities.addAll(ports.get(adjacentPort));
@@ -66,15 +46,36 @@ public class Teleport {
 		}
 		return teleportableCities;
 	}
-	
-	public static<T> boolean isInLoop(Port<T> originCity, LinkedHashMap<Port<T>, List<Port<T>>> ports){
-		
-		Set<Port<T>> adjacentCities = new LinkedHashSet<Port<T>>(ports.get(originCity));
-		
-		Iterator<Port<T>> iter = adjacentCities.iterator();
 
-		Port<T> parent = originCity;
+	public static boolean canTeleport(Port fromCity, Port toCity, LinkedHashMap<Port, List<Port>> ports){
+
+		Set<Port> teleportableCities = new HashSet<Port>(ports.get(fromCity));
 		
+		System.out.println(fromCity + " - " + teleportableCities);
+
+		if(teleportableCities.contains(toCity)){
+			return true;
+		} else {
+			fromCity.setVisited(true);
+			Iterator<Port> iter = teleportableCities.iterator();
+			while (iter.hasNext()) {
+				Port adjacentPort = iter.next();
+				if(!adjacentPort.isVisited())
+					return canTeleport(adjacentPort, toCity, ports);
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean isInLoop(Port originCity, LinkedHashMap<Port, List<Port>> ports){
+
+		Set<Port> adjacentCities = new LinkedHashSet<Port>(ports.get(originCity));
+
+		Iterator<Port> iter = adjacentCities.iterator();
+
+		Port parent = originCity;
+
 		while (iter.hasNext()) {
 
 			//DFS Depth First Search for (city)
@@ -85,39 +86,43 @@ public class Teleport {
 		}
 
 		return false;
-		
-	}
-	
 
-	private static<T> boolean recursive(Port<T> next, Port<T> parent, Port<T> origin, LinkedHashMap<Port<T>, List<Port<T>>> ports) {
+	}
+
+
+	private static boolean recursive(Port next, Port parent, Port origin, LinkedHashMap<Port, List<Port>> ports) {
+		
+		LOGGER.setLevel(Level.WARNING);
 
 		LOGGER.info( "NEXT:" + next + " PARENT:" + parent + " ORIGIN:" + origin);
-		
+
 		if (!next.isVisited()) {
 			next.setVisited(true);
 		}
-		
-		Set<Port<T>> nextAdjacentCities = new LinkedHashSet<Port<T>>(ports.get(next));
-		
+
+		Set<Port> nextAdjacentCities = new LinkedHashSet<Port>(ports.get(next));
+
 		if(null != nextAdjacentCities && nextAdjacentCities.contains(parent)){
 			nextAdjacentCities.remove(parent);
 			if(nextAdjacentCities.contains(origin)){
 				return true;
 			}
 		}
-		
-		Iterator<Port<T>> itr = nextAdjacentCities.iterator();
+
+		Iterator<Port> itr = nextAdjacentCities.iterator();
 		while (itr.hasNext()) {
 			parent = next;
-			Port<T> nextcity = itr.next();
+			Port nextcity = itr.next();
 			if(!nextcity.isVisited()) {
 				if(recursive(nextcity, parent, origin, ports)) {
 					return true;
 				}
 			}
 		}
-		
+
 		return false;
 
 	}
+
+
 }
