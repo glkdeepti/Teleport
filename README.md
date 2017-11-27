@@ -12,10 +12,10 @@ Static API's are implemented to solve the queries provided in input file.
 4. Queries text remains same execpt the variable parameters like ports and jumps which can be changed in input text file. Questions can be asked in any order.
 
 ## CORE CLASSES:
-Port.java: 				Generic class representation of Port. 
-TeleportsAdjMap.java:   Creates the HashMap of Ports. 
-TeleportAPI.java:       Contains the static API's for the queries specified in the problem.
-TeleportAPITest.java:   jUnit for the API's  in TeleportAPI.
+Port.java: 				Generic class representation of Port.   
+TeleportsAdjMap.java:   Creates the HashMap of Ports.   
+TeleportAPI.java:       Contains the static API's for the queries specified in the problem.  
+TeleportAPITest.java:   jUnit for the API's  in TeleportAPI.  
 
 ## EXECUTION:
 Invocation Order: TeleportMain.java -> TeleportParser.java(Creates TeleportsAdjMap.java) -> TeleportAPI.java
@@ -43,26 +43,25 @@ Questions you must be able to answer:
 another, without traveling along the same route twice)?
 Input to the program will be a list of teleportation routes, followed by a list of queries.
 ### Example input:
-Washington - Baltimore
-Washington - Atlanta
-Baltimore - Philadelphia
-Philadelphia - New York
-Los Angeles - San Fransisco
-San Fransisco - Oakland
-Los Angeles - Oakland
-Seattle - New York
-Seattle - Baltimore
-cities from Seattle in 1 jumps
-cities from Seattle in 2 jumps
-can I teleport from New York to Atlanta
-can I teleport from Oakland to Atlanta
-loop possible from Oakland
-loop possible from Washington
+Washington - Baltimore  
+Washington - Atlanta  
+Baltimore - Philadelphia  
+Philadelphia - New York  
+Los Angeles - San Fransisco  
+San Fransisco - Oakland  
+Los Angeles - Oakland  
+Seattle - New York  
+Seattle - Baltimore  
+cities from Seattle in 1 jumps  
+cities from Seattle in 2 jumps  
+can I teleport from New York to Atlanta  
+can I teleport from Oakland to Atlanta  
+loop possible from Oakland  
+loop possible from Washington  
 ### Example output:
-cities from Seattle in 1 jumps: New York, Baltimore
-cities from Seattle in 2 jumps: New York, Baltimore, Philadelphia, Washington
-can I teleport from New York to Atlanta: yes
-can I teleport from Oakland to Atlanta: no
-loop possible from Oakland: yes
-
-loop possible from Washington: no
+cities from Seattle in 1 jumps: New York, Baltimore  
+cities from Seattle in 2 jumps: New York, Baltimore, Philadelphia, Washington  
+can I teleport from New York to Atlanta: yes  
+can I teleport from Oakland to Atlanta: no  
+loop possible from Oakland: yes  
+loop possible from Washington: no  
