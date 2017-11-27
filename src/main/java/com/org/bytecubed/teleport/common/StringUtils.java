@@ -26,5 +26,10 @@ public class StringUtils {
 		}
 		return true;
 	}
+	
+	
+	public static String translate(boolean trueOrFalse) {
+	    return trueOrFalse ? "yes" : "no";
+	}
 
 }

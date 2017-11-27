@@ -55,12 +55,12 @@ public class TeleportParser {
 		} else if (mCanTeleport.matches()) {
 			reset(ports.getPorts());
 			result = line + ": " 
-					+ TeleportAPI.canTeleport(getPort(mCanTeleport.group(1).trim()), getPort(mCanTeleport.group(2).trim()), ports.getPorts());
+					+ (TeleportAPI.canTeleport(getPort(mCanTeleport.group(1).trim()), getPort(mCanTeleport.group(2).trim()), ports.getPorts()) ? "yes" : "no");
 			System.out.println(result);
 		} else if (mIsLoop.matches()) {
 			reset(ports.getPorts());
 			result = line + ": " 
-					+ TeleportAPI.isInLoop(getPort(mIsLoop.group(1).trim()), ports.getPorts());
+					+ (TeleportAPI.isInLoop(getPort(mIsLoop.group(1).trim()), ports.getPorts()) ? "yes" : "no");
 			System.out.println(result);
 		}
 
