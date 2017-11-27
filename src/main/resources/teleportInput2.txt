@@ -1,0 +1,15 @@
+Washington - Baltimore
+Washington - Atlanta
+Baltimore - Philadelphia
+Philadelphia - New York
+Los Angeles - San Fransisco
+San Fransisco - Oakland
+Los Angeles - Oakland
+Seattle - New York
+Seattle - Baltimore
+cities from Oakland in 1 jumps
+cities from Oakland in 2 jumps
+can I teleport from Atlanta to Philadelphia
+can I teleport from Oakland to Baltimore
+loop possible from Baltimore
+loop possible from New York

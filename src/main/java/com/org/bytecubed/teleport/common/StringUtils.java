@@ -1,6 +1,18 @@
-package com.org.bytecoded.teleport.common;
+package com.org.bytecubed.teleport.common;
 
+/**
+ * @description Common class for String manupulations
+ * @author Deepti
+ *
+ */
 public class StringUtils {
+
+	/**
+	 * Suppress default constructor for noninstantiability     
+	 */
+	private StringUtils() {         
+		// This constructor will never be invoked 
+	}
 
 	public static boolean isBlank(String str) {
 		int strLen;

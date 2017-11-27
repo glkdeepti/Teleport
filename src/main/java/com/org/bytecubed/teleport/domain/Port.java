@@ -1,5 +1,11 @@
-package com.org.bytecoded.teleport.domain;
+package com.org.bytecubed.teleport.domain;
 
+/**
+ * @description Generic class representing Port.
+ * @author Deepti
+ *
+ * @param <T>
+ */
 public class Port<T> {
 
 	T portName;
@@ -10,6 +16,14 @@ public class Port<T> {
 		this.portName = portNm;
 	}
 
+	public boolean isVisited() {
+		return visited;
+	}
+
+	public void setVisited(boolean visited) {
+		this.visited = visited;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -18,6 +32,7 @@ public class Port<T> {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -35,20 +50,10 @@ public class Port<T> {
 		return true;
 	}
 
-
-	public String toString(){
-		return "(" + this.portName + "," + this.visited + ")";
+	@Override
+	public String toString() {
+		return (String) this.portName;
+		//		return "(" + this.portName + "," + this.visited + ")";
 	}
-
-
-	public boolean isVisited() {
-		return visited;
-	}
-
-
-	public void setVisited(boolean visited) {
-		this.visited = visited;
-	}
-
 
 }
