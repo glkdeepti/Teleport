@@ -12,12 +12,16 @@ Static API's are implemented to solve the queries provided in input file.
 4. Queries text remains same execpt the variable parameters like ports and jumps which can be changed in input text file. Questions can be asked in any order.
 
 ## CORE CLASSES:
-Port.java: 				Generic class representation of Port.   
+Port.java: 		Generic class representation of Port.   
 TeleportsAdjMap.java:   Creates the HashMap of Ports.   
 TeleportAPI.java:       Contains the static API's for the queries specified in the problem.  
 TeleportAPITest.java:   jUnit for the API's  in TeleportAPI.  
 
 ## EXECUTION:
+
+mvn install
+mvn exec:java -Dexec.mainClass="com.org.bytecubed.teleport.main.TeleportMain"  
+
 Invocation Order: TeleportMain.java -> TeleportParser.java(Creates TeleportsAdjMap.java) -> TeleportAPI.java
 
 Appropriate exceptions are thrown when erronous input is provided. Certain input validations are not needed, so not providing them.
